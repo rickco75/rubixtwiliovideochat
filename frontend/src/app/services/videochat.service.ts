@@ -31,7 +31,7 @@ export class VideoChatService {
     private async getAuthToken() {
         const auth =
             await this.http
-                      .get<AuthToken>(`api/video/token`)
+                      .get<AuthToken>(`https://localhost:5001/api/video/token`)
                       .toPromise();
 
         return auth.token;
@@ -39,7 +39,7 @@ export class VideoChatService {
 
     getAllRooms() {
         return this.http
-                   .get<Rooms>('api/video/rooms')
+                   .get<Rooms>('https://localhost:5001/api/video/rooms')
                    .toPromise();
     }
 
