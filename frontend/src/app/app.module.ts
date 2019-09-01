@@ -25,6 +25,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { DeviceSelectComponent } from './settings/device-select.component';
 import { VideochatComponent } from './videochat/videochat.component';
 
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { VideochatComponent } from './videochat/videochat.component';
     HttpClientModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChartsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true

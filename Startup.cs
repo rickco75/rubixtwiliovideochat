@@ -22,6 +22,7 @@ using rubix.Abstractions;
 using rubix.Hubs;
 using rubix.Options;
 using rubix.Services;
+using rubix.HubsConfig;
 
 namespace rubix
 {
@@ -51,10 +52,11 @@ namespace rubix
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                        builder => builder
+                        builder => builder.WithOrigins("http://localhost:4200")
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()
+                            .AllowCredentials()
                         );
             });
 
@@ -133,9 +135,13 @@ namespace rubix
             // SignalR
 
             // added for angular front end to access .net core
-            app.UseCors(builder => builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+            // app.UseCors(builder => builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
-            .AllowAnyMethod());
+            .AllowAnyMethod()
+            .AllowAnyOrigin()
+            .AllowCredentials());
+          
 
             //app.UseHttpsRedirection();
             // app.UseStaticFiles();
@@ -143,12 +149,13 @@ namespace rubix
 
             app.UseAuthentication();
 
-            app.UseCors("CorsPolicy");
+            //app.UseCors("CorsPolicy");
 
 
             app.UseSignalR(routes =>
                {
                    routes.MapHub<NotificationHub>("/notificationHub");
+                   //routes.MapHub<ChartHub>("/chart");                   
                });
 
             app.UseMvc();

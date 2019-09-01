@@ -29,7 +29,8 @@ export class VideochatComponent implements OnInit {
         const builder =
             new HubConnectionBuilder()
                 .configureLogging(LogLevel.Information)
-                .withUrl(`${location.origin}/notificationHub`);
+                 .withUrl(`${location.origin}/notificationHub`);
+               // .withUrl(`https://localhost:5001/notificationHub`);
 
         this.notificationHub = builder.build();
         this.notificationHub.on('RoomsUpdated', async updated => {
